@@ -1,0 +1,45 @@
+package Model;
+
+import java.util.ArrayList;
+
+public class Boleta extends Comprobante {
+    private double subtotal;
+    private double igv;
+
+    public Boleta(int idVenta, String serie, int numCorrelativo, String fechaHora,
+                  Cliente cliente, Empleado empleado, AperturaCierreCaja sesionCaja,
+                  String metodoPago, ArrayList<DetalleVenta> items, ArrayList<VentaPago> pagos) {
+        super(idVenta, serie, numCorrelativo, fechaHora, 0, cliente, empleado,
+              sesionCaja, metodoPago, items, pagos);
+    }
+
+    @Override
+    public double calcularTotal() {
+        // En boleta el precio ya incluye IGV: se desglosa
+        totalPagar = sumarItems();
+        subtotal = totalPagar / 1.18;
+        igv = totalPagar - subtotal;
+        return totalPagar;
+    }
+
+    @Override
+    public void imprimir() {
+        calcularTotal();
+        System.out.println("========== BOLETA DE VENTA ==========");
+        System.out.println("Serie: " + serie + "-" + numCorrelativo + "   Fecha: " + fechaHora);
+        System.out.println("Cliente: " + cliente.getNombreCompleto() + "  Doc: " + cliente.getIdentificador());
+        System.out.println("Atendido por: " + empleado.getNombreCompleto());
+        System.out.println("-------------------------------------");
+        for (DetalleVenta d : items) {
+            System.out.printf("%d x %.2f = %.2f%n", d.getCantidad(), d.getPrecioVenta(), d.calcularSubtotal());
+        }
+        System.out.println("-------------------------------------");
+        System.out.printf("Op. gravada: S/ %.2f%n", subtotal);
+        System.out.printf("IGV (18%%):  S/ %.2f%n", igv);
+        System.out.printf("TOTAL:      S/ %.2f%n", totalPagar);
+        System.out.println("=====================================");
+    }
+
+    public double getSubtotal() { return subtotal; }
+    public double getIgv() { return igv; }
+}
