@@ -1,3 +1,5 @@
+package Model;
+
 public class Empleado {
     private int idEmpleado;
     private String nombres;
