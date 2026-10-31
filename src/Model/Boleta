@@ -3,14 +3,15 @@ package Model;
 import java.util.ArrayList;
 
 public class Boleta extends Comprobante {
+
     private double subtotal;
     private double igv;
 
     public Boleta(int idVenta, String serie, int numCorrelativo, String fechaHora,
-                  Cliente cliente, Empleado empleado, AperturaCierreCaja sesionCaja,
-                  String metodoPago, ArrayList<DetalleVenta> items, ArrayList<VentaPago> pagos) {
+            Cliente cliente, Empleado empleado, AperturaCierreCaja sesionCaja,
+            String metodoPago, ArrayList<DetalleVenta> items, ArrayList<VentaPago> pagos) {
         super(idVenta, serie, numCorrelativo, fechaHora, 0, cliente, empleado,
-              sesionCaja, metodoPago, items, pagos);
+                sesionCaja, metodoPago, items, pagos);
     }
 
     @Override
@@ -40,6 +41,11 @@ public class Boleta extends Comprobante {
         System.out.println("=====================================");
     }
 
-    public double getSubtotal() { return subtotal; }
-    public double getIgv() { return igv; }
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public double getIgv() {
+        return igv;
+    }
 }

@@ -1,15 +1,15 @@
 
 package Model;
 
+import App.dbConnection;
+import java.sql.CallableStatement;
+
 public class Categoria {
     private int idCategoria;
     private String nombreCategoria;
     private String descripcion;
 
-    public Categoria(int idCategoria, String nombreCategoria, String descripcion) {
-        this.idCategoria = idCategoria;
-        this.nombreCategoria = nombreCategoria;
-        this.descripcion = descripcion;
+    public Categoria() {
     }
 
     public int getIdCategoria() {
@@ -36,5 +36,24 @@ public class Categoria {
         this.descripcion = descripcion;
     }
     
+    public void insertarCategoria( String paraNombreCate, String paraDescripcion){
+        
+        dbConnection objeto_conexion=  new dbConnection();
+        
+        String consulta="INSERT INTO categoria (nombreCategoria, descripcion) VALUES (?, ?);";
+        
+        try{
+            CallableStatement cs = objeto_conexion.conectar().prepareCall(consulta);
+            cs.setString(1, paraNombreCate);
+            cs.setString(2, paraDescripcion);
+            
+            cs.execute();
+            
+            System.out.println("¡Categoría guardada con éxito!");
+            
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     
 }
