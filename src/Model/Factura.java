@@ -1,4 +1,4 @@
-.javapackage Model;
+package Model;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ public class Factura extends Comprobante {
     private double igv;
 
     public Factura(int idVenta, String serie, int numCorrelativo, String fechaHora,
-                   ClienteJuridica cliente, Empleado empleado, AperturaCierreCaja sesionCaja,
+                   ClienteJurídica cliente, Empleado empleado, AperturaCierreCaja sesionCaja,
                    String metodoPago, ArrayList<DetalleVenta> items, ArrayList<VentaPago> pagos) {
         super(idVenta, serie, numCorrelativo, fechaHora, 0, cliente, empleado,
               sesionCaja, metodoPago, items, pagos);
